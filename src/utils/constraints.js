@@ -31,7 +31,7 @@ export const ToDoType = [
     }
 ];
 
-export const TaskPriority = [
+export const ToDoPriority = [
     {
         id: 1,
         label: 'Low',
@@ -47,4 +47,17 @@ export const TaskPriority = [
         label: 'High',
         value: 'high'
     },
-]
+];
+
+export const ToDoStatus = [
+    {
+        id: 1,
+        label: 'In Progress',
+        value: 'progress'
+    },
+    {
+        id: 2,
+        label: 'Completed',
+        value: 'completed'
+    },
+];

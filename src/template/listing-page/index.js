@@ -4,6 +4,7 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import { Typography } from '@material-ui/core';
 import { data } from '../../mock-data/get';
+import { ModalBox } from '../../component/modal-box';
 import './listing-page.css';
 
 const ListingPage = () => {
@@ -13,8 +14,12 @@ const ListingPage = () => {
 
     useEffect(() => {
         // fetch tasklist from get api
-        setTaskList(data.list || []);
+        setTaskList(data.lists || []);
     }, []);
+
+    const btnProps = {
+        label: 'Create todo'
+    }
 
     if (taskList.length) {
         const wipTask = [];
@@ -47,8 +52,8 @@ const ListingPage = () => {
                                 </Grid>
                             </>
                             :
-                            <Grid item xs={6} sm={6} md={6}>
-                                help me here
+                            <Grid item xs={12} sm={6} md={6}>
+                                <ModalBox />
                             </Grid>
                     }
                 </Grid>
