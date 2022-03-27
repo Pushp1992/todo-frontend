@@ -25,7 +25,7 @@ export const ToDoType = [
         value: 'office'
     },
     {
-        id: 5,
+        id: 6,
         label: 'Others',
         value: 'others'
     }
@@ -43,7 +43,7 @@ export const ToDoPriority = [
         value: 'medium'
     },
     {
-        id: 1,
+        id: 3,
         label: 'High',
         value: 'high'
     },

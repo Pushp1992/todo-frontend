@@ -13,7 +13,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 import { ToDoType, ToDoPriority, ToDoStatus } from '../../utils/constraints';
 
-// I am using styled-component exclusively for this Dialog-box
+// styled-component is used exclusively for this Dialog-box
 const useStyles = makeStyles((theme) => ({
     root: {
         '& .MuiTextField-root': {
@@ -81,15 +81,22 @@ export const ModalBox = () => {
         setOpen(false);
     };
 
-    const createToDoTask = (e) => {
+    const handleInputChange = (e) => {
         e.preventDefault();
-
-        console.log('to do task');
-        setOpen(false);
+        const { name: selectedAttribte, value: selectedvalue } = e.target;
+        setTodoData({ ...todoData, [selectedAttribte]: selectedvalue });
     };
 
-    const handleSelection = (e) => {
+    const createToDoTask = (e) => {
         e.preventDefault();
+;
+        // There could have been more optimal way to generate id for each object
+        // IMO, in MongoDb, this ID will be auto generated, while creating POST reqest
+        const randomId = Math.floor(Math.random()*(999-100+1)+100);
+        const payloadData = {...todoData, id: randomId}
+
+        console.log(payloadData);
+        // setOpen(false);
     };
 
     return (
@@ -103,29 +110,29 @@ export const ModalBox = () => {
                 </DialogTitle>
                 <DialogContent dividers>
                     <form className={classes.root} noValidate autoComplete="off">
-                        <TextField required id="todo-title" label="Todo Title" defaultValue='' variant="outlined" />
-                        <TextField select required id="todo-priority" label="Todo Priority" value={todoData.priority} onChange={handleSelection} variant="outlined">
+                        <TextField required name="title" label="Todo Title" defaultValue={todoData.title} onChange={handleInputChange} variant="outlined" />
+                        <TextField select required name="priority" label="todo_priority" value={todoData.priority} onChange={handleInputChange} variant="outlined">
                             {
                                 ToDoPriority.map((option) => (
                                     <MenuItem key={option.id} value={option.value}>{option.label}</MenuItem>
                                 ))
                             }
                         </TextField>
-                        <TextField select required id="todo-status" label="Todo status" value={todoData.status} onChange={handleSelection} variant="outlined">
+                        <TextField select required name="status" label="todo_status" value={todoData.status} onChange={handleInputChange} variant="outlined">
                             {
                                 ToDoStatus.map((option) => (
                                     <MenuItem key={option.id} value={option.value}>{option.label}</MenuItem>
                                 ))
                             }
                         </TextField>
-                        <TextField select required id="todo-type" label="Todo type" value={todoData.todo_type} onChange={handleSelection} variant="outlined">
+                        <TextField select required name="todo_type" label="todo_type" value={todoData.todo_type} onChange={handleInputChange} variant="outlined">
                             {
                                 ToDoType.map((option) => (
                                     <MenuItem key={option.id} value={option.value}>{option.label}</MenuItem>
                                 ))
                             }
                         </TextField>
-                        <TextField required id="todo-desc" label="Description" defaultValue='' variant="outlined" multiline row={6} />
+                        <TextField required name="description" label="todo_desc" defaultValue={todoData.description} onChange={handleInputChange} variant="outlined" multiline row={6} />
                     </form>
                 </DialogContent>
                 <DialogActions>
