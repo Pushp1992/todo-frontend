@@ -1,0 +1,13 @@
+.header-container {
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    min-height: 8vh;
+}
+
+.header-container--title {
+    font-family: sans-serif;
+    font-weight: 500;
+}

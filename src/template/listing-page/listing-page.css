@@ -1,0 +1,12 @@
+.list-page {
+    margin-top: 2rem;
+}
+
+.list-page--container {
+    background-color: ghostwhite;
+    min-height: 90vh;
+}
+
+.list-page--items>* {
+    background-color: whitesmoke;
+}
