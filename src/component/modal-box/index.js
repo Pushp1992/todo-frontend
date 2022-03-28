@@ -112,12 +112,15 @@ export const ModalBox = ({ btnProps, data }) => {
             </Button>
             <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
                 <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-                    Modal title
+                    My Task
                 </DialogTitle>
                 <DialogContent dividers>
                     <form className={classes.root} noValidate autoComplete="off">
-                        <TextField required name="title" label="Title" value={todoData.title} onChange={handleInputChange} variant="outlined" />
-                        <TextField select required name="priority" label="Priority" value={todoData.priority} onChange={handleInputChange} variant="outlined">
+                        <TextField required name="title" label="Title" value={todoData.title}
+                            onChange={handleInputChange} variant="outlined" />
+
+                        <TextField select disabled={todoData.status === 'completed' ? true : false} required name="priority" label="Priority"
+                            value={todoData.priority} onChange={handleInputChange} variant="outlined" helperText={todoData.status === 'completed' ? 'this is readonly' : ''}>
                             {
                                 ToDoPriority.map((option) => (
                                     <MenuItem key={option.id} value={option.value}>{option.label}</MenuItem>
@@ -131,14 +134,16 @@ export const ModalBox = ({ btnProps, data }) => {
                                 ))
                             }
                         </TextField>
-                        <TextField select required name="todo_type" label="Type" value={todoData.todo_type} onChange={handleInputChange} variant="outlined">
+                        <TextField select disabled={todoData.status === 'completed' ? true : false} required name="todo_type" label="Type"
+                            value={todoData.todo_type} onChange={handleInputChange} variant="outlined" helperText={todoData.status === 'completed' ? 'this is readonly' : ''}>
                             {
                                 ToDoType.map((option) => (
                                     <MenuItem key={option.id} value={option.value}>{option.label}</MenuItem>
                                 ))
                             }
                         </TextField>
-                        <TextField required name="description" label="Description" value={todoData.description} onChange={handleInputChange} variant="outlined" multiline row={6} />
+                        <TextField required name="description" label="Description" value={todoData.description}
+                            onChange={handleInputChange} variant="outlined" multiline row={6} />
                     </form>
                 </DialogContent>
                 <DialogActions>
