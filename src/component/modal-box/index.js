@@ -97,7 +97,7 @@ export const ModalBox = ({ btnProps, data }) => {
     const createToDoTask = (e) => {
         e.preventDefault();
         // There could have been more optimal way to generate id for each object
-        // IMO, in MongoDb, this ID will be auto generated, while creating POST reqest
+        // IMO, in MongoDb, this ID will be auto generated, while creating POST request
         const randomId = Math.floor(Math.random() * (999 - 100 + 1) + 100);
         const payloadData = { ...todoData, id: randomId }
 
@@ -110,7 +110,7 @@ export const ModalBox = ({ btnProps, data }) => {
             <Button variant={btnProps.variant} name="create-edit-todo" value="create" label={btnProps.label} color="primary" size="small" onClick={handleClickOpen}>
                 {btnProps.name}
             </Button>
-            <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+            <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open} disableBackdropClick={true}>
                 <DialogTitle id="customized-dialog-title" onClose={handleClose}>
                     My Task
                 </DialogTitle>
