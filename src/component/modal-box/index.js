@@ -63,7 +63,7 @@ const DialogActions = withStyles((theme) => ({
     },
 }))(MuiDialogActions);
 
-export const ModalBox = () => {
+export const ModalBox = ({ btnProps, data }) => {
     const [todoData, setTodoData] = useState({
         title: '',
         priority: '',
@@ -74,7 +74,14 @@ export const ModalBox = () => {
 
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
-    const handleClickOpen = () => {
+    const handleClickOpen = (e) => {
+        e.preventDefault();
+
+        const { innerHTML } = e.target;
+
+        if (innerHTML === 'edit') {
+            setTodoData(data);
+        }
         setOpen(true);
     };
     const handleClose = () => {
@@ -89,11 +96,10 @@ export const ModalBox = () => {
 
     const createToDoTask = (e) => {
         e.preventDefault();
-;
         // There could have been more optimal way to generate id for each object
         // IMO, in MongoDb, this ID will be auto generated, while creating POST reqest
-        const randomId = Math.floor(Math.random()*(999-100+1)+100);
-        const payloadData = {...todoData, id: randomId}
+        const randomId = Math.floor(Math.random() * (999 - 100 + 1) + 100);
+        const payloadData = { ...todoData, id: randomId }
 
         console.log(payloadData);
         // setOpen(false);
@@ -101,8 +107,8 @@ export const ModalBox = () => {
 
     return (
         <div>
-            <Button variant="outlined" color="primary" size="small" onClick={handleClickOpen}>
-                Create your own ToDo
+            <Button variant={btnProps.variant} name="create-edit-todo" value="create" label={btnProps.label} color="primary" size="small" onClick={handleClickOpen}>
+                {btnProps.name}
             </Button>
             <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
                 <DialogTitle id="customized-dialog-title" onClose={handleClose}>
@@ -110,29 +116,29 @@ export const ModalBox = () => {
                 </DialogTitle>
                 <DialogContent dividers>
                     <form className={classes.root} noValidate autoComplete="off">
-                        <TextField required name="title" label="Todo Title" defaultValue={todoData.title} onChange={handleInputChange} variant="outlined" />
-                        <TextField select required name="priority" label="todo_priority" value={todoData.priority} onChange={handleInputChange} variant="outlined">
+                        <TextField required name="title" label="Title" value={todoData.title} onChange={handleInputChange} variant="outlined" />
+                        <TextField select required name="priority" label="Priority" value={todoData.priority} onChange={handleInputChange} variant="outlined">
                             {
                                 ToDoPriority.map((option) => (
                                     <MenuItem key={option.id} value={option.value}>{option.label}</MenuItem>
                                 ))
                             }
                         </TextField>
-                        <TextField select required name="status" label="todo_status" value={todoData.status} onChange={handleInputChange} variant="outlined">
+                        <TextField select required name="status" label="Status" value={todoData.status} onChange={handleInputChange} variant="outlined">
                             {
                                 ToDoStatus.map((option) => (
                                     <MenuItem key={option.id} value={option.value}>{option.label}</MenuItem>
                                 ))
                             }
                         </TextField>
-                        <TextField select required name="todo_type" label="todo_type" value={todoData.todo_type} onChange={handleInputChange} variant="outlined">
+                        <TextField select required name="todo_type" label="Type" value={todoData.todo_type} onChange={handleInputChange} variant="outlined">
                             {
                                 ToDoType.map((option) => (
                                     <MenuItem key={option.id} value={option.value}>{option.label}</MenuItem>
                                 ))
                             }
                         </TextField>
-                        <TextField required name="description" label="todo_desc" defaultValue={todoData.description} onChange={handleInputChange} variant="outlined" multiline row={6} />
+                        <TextField required name="description" label="Description" value={todoData.description} onChange={handleInputChange} variant="outlined" multiline row={6} />
                     </form>
                 </DialogContent>
                 <DialogActions>

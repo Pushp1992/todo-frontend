@@ -6,7 +6,7 @@ export const data = {
             priority: 'low',
             status: 'completed',
             todo_type: 'bike',
-            content: 'I have to give my bike for service'
+            description: 'I have to give my bike for service'
         },
         {
             id: 2,
@@ -14,15 +14,15 @@ export const data = {
             priority: 'high',
             status: 'progress',
             todo_type: 'car',
-            content: 'I have to give my bike for service'
+            description: 'I have to give my bike for service'
         },
         {
             id: 3,
             title: 'get closth washed',
             priority: 'low',
             status: 'completed',
-            todo_type: 'laundary',
-            content: 'I have to give my cloths for laundry'
+            todo_type: 'laundry',
+            description: 'I have to give my cloths for laundry'
         },
     ]
 }

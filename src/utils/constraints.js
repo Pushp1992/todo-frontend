@@ -16,7 +16,7 @@ export const ToDoType = [
     },
     {
         id: 4,
-        label: 'Laundary',
+        label: 'Laundry',
         value: 'laundry'
     },
     {

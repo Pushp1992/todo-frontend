@@ -5,6 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 import Typography from '@material-ui/core/Typography';
+import { ModalBox } from '../../component/modal-box';
 
 const styles = {
     root: {
@@ -29,7 +30,17 @@ export const CardList = (props) => {
 
     useEffect(() => {
         setTaskData(props.taskData)
-    },[])
+    }, []);
+
+    const btnProps = {
+        name: 'edit',
+        variant: 'none',
+        label: 'edit'
+    };
+
+    const handleCardOperation = (e) => {
+        e.preventDefault();
+    };
 
     return (
         <>
@@ -46,15 +57,15 @@ export const CardList = (props) => {
                                 </Typography>
                                 <Typography>
                                     <Chip variant="outlined" color="primary" size="small" label={task.priority} /> &nbsp;
-                            <Chip color="primary" size="small" label={task.todo_type} />
+                                     <Chip color="primary" size="small" label={task.todo_type} />
                                 </Typography>
                                 <Typography variant="body2" component="p">
                                     {task.content}
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size="small" color='primary'>Edit</Button>
-                                <Button size="small" color='secondary'>delete</Button>
+                                <ModalBox btnProps = {btnProps} data={task} />
+                                <Button size="small" color='secondary' name="delete" onClick={handleCardOperation}>delete</Button>
                             </CardActions>
                         </Card>
                     )

@@ -12,14 +12,22 @@ const ListingPage = () => {
     let wipTaskData = {};
     let completedTaskData = {};
 
+    const btnProps = {
+        name: 'Create your own ToDo',
+        label: 'create',
+        variant: 'outlined'
+    };
+
     useEffect(() => {
-        // fetch tasklist from get api
-        setTaskList(data.lists || []);
+        // fetch ToDo List from Get API
+        fetchToDoList();
+        setTaskList(data.list || []);
     }, []);
 
-    const btnProps = {
-        label: 'Create todo'
-    }
+    const fetchToDoList = () => {
+        // todo here
+        console.log('this should fire when any task is created/edited/deleted');
+    };
 
     if (taskList.length) {
         const wipTask = [];
@@ -53,7 +61,7 @@ const ListingPage = () => {
                             </>
                             :
                             <Grid item xs={12} sm={6} md={6}>
-                                <ModalBox />
+                                <ModalBox btnProps={btnProps} />
                             </Grid>
                     }
                 </Grid>
