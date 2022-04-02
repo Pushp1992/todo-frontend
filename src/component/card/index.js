@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 import Typography from '@material-ui/core/Typography';
 import { ModalBox } from '../create-modal-box';
+import { todoService } from '../../utils/todo-service';
 
 const styles = {
     root: {
@@ -38,8 +39,19 @@ export const CardList = (props) => {
         label: 'edit'
     };
 
-    const handleCardOperation = (e) => {
+    const handleCardOperation = (e, id) => {
         e.preventDefault();
+        todoService.removeTask(id)
+            .then(res => {
+                if (res.statusCode !== 200) {
+                    console.log(`Error deleting task. iD: ${id}` || res.message);
+                    return;
+                }
+                console.log(res.message);
+            }).catch(err => {
+                console.log(err.message);
+                return;
+            });
     };
 
     return (
@@ -50,7 +62,7 @@ export const CardList = (props) => {
                         <Card key={task.id} className={styles.root} variant="outlined">
                             <CardContent>
                                 <Typography className={styles.title} color="textSecondary" gutterBottom>
-                                    {`#TD-${task.id}`}
+                                    {`task_id: ${task._id.slice(18)}`}
                                 </Typography>
                                 <Typography className={styles.title} color="textSecondary" gutterBottom>
                                     {task?.title || ''}
@@ -64,8 +76,8 @@ export const CardList = (props) => {
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <ModalBox btnProps = {btnProps} data={task} />
-                                <Button size="small" color='secondary' name="delete" onClick={handleCardOperation}>delete</Button>
+                                <ModalBox btnProps={btnProps} data={task} />
+                                <Button size="small" color='secondary' name="delete" onClick={(e) => handleCardOperation(e, task._id)}>delete</Button>
                             </CardActions>
                         </Card>
                     )

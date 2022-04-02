@@ -13,6 +13,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 import { ToDoType, ToDoPriority, ToDoStatus } from '../../utils/constraints';
 import { todoService } from '../../utils/todo-service';
+import { validateCreatePayload } from '../../utils/input-validation';
+import SimpleAlerts from '../snackbar';
 
 // styled-component is used exclusively for this Dialog-box
 const useStyles = makeStyles((theme) => ({
@@ -68,13 +70,14 @@ export const ModalBox = ({ btnProps, data }) => {
     const [todoData, setTodoData] = useState({
         title: '',
         priority: '',
-        status: '',
+        status: 'progress',
         todo_type: '',
         description: ''
     });
 
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
+
     const handleClickOpen = (e) => {
         e.preventDefault();
 
@@ -95,9 +98,21 @@ export const ModalBox = ({ btnProps, data }) => {
         setTodoData({ ...todoData, [selectedAttribte]: selectedvalue });
     };
 
-    const createToDoTask = (e) => {
+    const alertprops = {
+        severity: "warning",
+        msg: "Input field cannot be empty"
+    };
+
+    const createUpdateToDoTask = (e) => {
         e.preventDefault();
-        todoService.createTask(todoData)
+        const isPayloadInValid = validateCreatePayload(todoData);
+
+        if (isPayloadInValid) {
+            <SimpleAlerts {...alertprops} />
+            return;
+        }
+
+        todoService.createUpdateTask(todoData, btnProps.label, data?._id || '')
             .then(res => {
                 if (res.statusCode !== 200) {
                     console.log(`Error creating task.` || res.message);
@@ -107,6 +122,8 @@ export const ModalBox = ({ btnProps, data }) => {
             }).catch(err => {
                 console.log(err.message);
             });
+
+        handleClose();
     };
 
     return (
@@ -116,7 +133,7 @@ export const ModalBox = ({ btnProps, data }) => {
             </Button>
             <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open} disableBackdropClick={true}>
                 <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-                    My Task
+                    {btnProps.label}
                 </DialogTitle>
                 <DialogContent dividers>
                     <form className={classes.root} noValidate autoComplete="off">
@@ -131,7 +148,8 @@ export const ModalBox = ({ btnProps, data }) => {
                                 ))
                             }
                         </TextField>
-                        <TextField select required name="status" label="Status" value={todoData.status} onChange={handleInputChange} variant="outlined">
+                        <TextField select required name="status" label="Status" value={todoData.status} onChange={handleInputChange}
+                            disabled={todoData.status === 'completed' ? false : true} defaultValue={todoData.status} variant="outlined">
                             {
                                 ToDoStatus.map((option) => (
                                     <MenuItem key={option.id} value={option.value}>{option.label}</MenuItem>
@@ -151,9 +169,9 @@ export const ModalBox = ({ btnProps, data }) => {
                     </form>
                 </DialogContent>
                 <DialogActions>
-                    <Button autoFocus onClick={createToDoTask} color="primary">
-                        Save changes
-             </Button>
+                    <Button autoFocus onClick={createUpdateToDoTask} color="primary">
+                        {btnProps.label}
+                    </Button>
                 </DialogActions>
             </Dialog>
         </div>

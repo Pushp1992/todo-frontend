@@ -62,6 +62,7 @@ const ListingPage = () => {
                             <>
                                 <Grid className="list-page--items-inprogress" item xs={12} sm={4} md={4}>
                                     <Typography color="textSecondary">To Do</Typography>
+                                    <ModalBox btnProps={btnProps} />
                                     <CardList {...wipTaskData} />
                                 </Grid> &nbsp;&nbsp;
                                 <Grid className="list-page--items-completed" item xs={12} sm={4} md={4}>
