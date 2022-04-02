@@ -1,13 +1,10 @@
 const proxy = require('express-http-proxy');
 const hosts = require('../config');
 
-console.log(hosts);
-
 function selectProxyHost(req) {
     const hostname = req.headers.server;
-    console.log('hostname: ', hostname);
-
     if (hosts[hostname]) {
+        // intentional use of console to print the hostname
         console.log('Host: ', hosts[hostName] + req.url);
         return hosts[hostName];
     }

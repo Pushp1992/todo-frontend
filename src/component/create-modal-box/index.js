@@ -12,6 +12,7 @@ import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 
 import { ToDoType, ToDoPriority, ToDoStatus } from '../../utils/constraints';
+import { todoService } from '../../utils/todo-service';
 
 // styled-component is used exclusively for this Dialog-box
 const useStyles = makeStyles((theme) => ({
@@ -96,13 +97,16 @@ export const ModalBox = ({ btnProps, data }) => {
 
     const createToDoTask = (e) => {
         e.preventDefault();
-        // There could have been more optimal way to generate id for each object
-        // IMO, in MongoDb, this ID will be auto generated, while creating POST request
-        const randomId = Math.floor(Math.random() * (999 - 100 + 1) + 100);
-        const payloadData = { ...todoData, id: randomId }
-
-        console.log(payloadData);
-        // setOpen(false);
+        todoService.createTask(todoData)
+            .then(res => {
+                if (res.statusCode !== 200) {
+                    console.log(`Error creating task.` || res.message);
+                    return;
+                }
+                console.log(res.message);
+            }).catch(err => {
+                console.log(err.message);
+            });
     };
 
     return (

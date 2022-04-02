@@ -5,7 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 import Typography from '@material-ui/core/Typography';
-import { ModalBox } from '../../component/modal-box';
+import { ModalBox } from '../create-modal-box';
 
 const styles = {
     root: {

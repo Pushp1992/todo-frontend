@@ -3,8 +3,8 @@ import { CardList } from '../../component/card';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import { Typography } from '@material-ui/core';
-import { data } from '../../mock-data/get';
-import { ModalBox } from '../../component/modal-box';
+import { ModalBox } from '../../component/create-modal-box';
+import { todoService } from '../../utils/todo-service';
 import './listing-page.css';
 
 const ListingPage = () => {
@@ -21,12 +21,22 @@ const ListingPage = () => {
     useEffect(() => {
         // fetch ToDo List from Get API
         fetchToDoList();
-        setTaskList(data.list || []);
     }, []);
 
     const fetchToDoList = () => {
-        // todo here
-        console.log('this should fire when any task is created/edited/deleted');
+        todoService.fetchTaskList()
+            .then(res => {
+                if (res.statusCode !== 200) {
+                    setTaskList([]);
+                    console.log('Empty task list');
+                    return;
+                }
+                setTaskList(res.data);
+            }).catch(err => {
+                setTaskList([]);
+                console.log(`Error getting task list. ${err.message}`);
+                return;
+            });
     };
 
     if (taskList.length) {

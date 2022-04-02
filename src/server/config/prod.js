@@ -1,6 +1,6 @@
 // to add
 const config = {
-    todoService: "prod_url",
+    todoServerHost: "prod_url",
 };
 
 module.exports = config;
