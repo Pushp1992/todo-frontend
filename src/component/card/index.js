@@ -59,12 +59,12 @@ export const CardList = (props) => {
             {
                 (taskData || []).map((task) => {
                     return (
-                        <Card key={task.id} className={styles.root} variant="outlined">
+                        <Card key={task.id} className={styles.root} variant="outlined" style={{ backgroundColor: props.bgColor }}>
                             <CardContent>
-                                <Typography className={styles.title} color="textSecondary" gutterBottom>
-                                    {`task_id: ${task._id.slice(18)}`}
+                                <Typography className={styles.title} gutterBottom>
+                                    {`Id: ${task._id.slice(18)}`}
                                 </Typography>
-                                <Typography className={styles.title} color="textSecondary" gutterBottom>
+                                <Typography className={styles.title} gutterBottom>
                                     {task?.title || ''}
                                 </Typography>
                                 <Typography>

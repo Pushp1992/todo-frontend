@@ -51,7 +51,10 @@ const ListingPage = () => {
             }
         });
         wipTaskData.taskData = wipTask;
+        wipTaskData.bgColor = 'lightyellow';
+
         completedTaskData.taskData = completedTask;
+        completedTaskData.bgColor = 'lightgreen';
     }
     return (
         <div className="list-page">

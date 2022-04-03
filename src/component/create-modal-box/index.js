@@ -136,7 +136,7 @@ export const ModalBox = ({ btnProps, data }) => {
                     {btnProps.label}
                 </DialogTitle>
                 <DialogContent dividers>
-                    <form className={classes.root} noValidate autoComplete="off">
+                    <form className={classes.root} noValidate autoComplete="on">
                         <TextField required name="title" label="Title" value={todoData.title}
                             onChange={handleInputChange} variant="outlined" />
 
@@ -149,7 +149,7 @@ export const ModalBox = ({ btnProps, data }) => {
                             }
                         </TextField>
                         <TextField select required name="status" label="Status" value={todoData.status} onChange={handleInputChange}
-                            disabled={todoData.status === 'completed' ? false : true} defaultValue={todoData.status} variant="outlined">
+                            disabled={todoData.status === 'completed' || btnProps.label === 'edit' ? false : true} defaultValue={todoData.status} variant="outlined">
                             {
                                 ToDoStatus.map((option) => (
                                     <MenuItem key={option.id} value={option.value}>{option.label}</MenuItem>
