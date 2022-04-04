@@ -1,4 +1,5 @@
-### NOTE: Dependency
+### ** NOTE: Dependency **
+_____________________________________
 
 This frontend has its Backend service at location [https://github.com/Pushp1992/todo-backend](https://github.com/Pushp1992/todo-backend)
 
@@ -9,13 +10,16 @@ This frontend has its Backend service at location [https://github.com/Pushp1992/
 - Note: Even if you don't run this backend service, your frontend application will not break the UI.
 
 ### Getting Started with Create React App
+__________________________________________
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ### Available Scripts
+_____________________________________
 
 In the project directory, you can run:
 ### `npm run dev`
+_____________________________________
 
 Runs the app in the development mode.\
 Open [http://localhost:8086](http://localhost:8086) to view it in your browser.
@@ -28,6 +32,7 @@ You may also see any lint errors in the console.
 - Proxy server PORT: 8085
 
 ### Diretory structure
+_____________________________________
 
     -- public
     -- src
