@@ -14,6 +14,16 @@ __________________________________________
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+### Teach-stack used
+__________________________________________
+
+- React
+- Hook
+- Material ui
+- styled component
+- node
+- express
+
 ### Available Scripts
 _____________________________________
 
