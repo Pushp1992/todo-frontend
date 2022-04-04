@@ -9,6 +9,8 @@ import './listing-page.css';
 
 const ListingPage = () => {
     const [taskList, setTaskList] = useState([]);
+    const [crudOperationPerformed, setCrudOperationPerformed] = useState(false);
+
     let wipTaskData = {};
     let completedTaskData = {};
 
@@ -18,10 +20,13 @@ const ListingPage = () => {
         variant: 'outlined'
     };
 
+    console.log('before crud op', crudOperationPerformed);
+
     useEffect(() => {
         // fetch ToDo List from Get API
+        console.log('after crud op', crudOperationPerformed);
         fetchToDoList();
-    }, []);
+    }, [crudOperationPerformed]);
 
     const fetchToDoList = () => {
         todoService.fetchTaskList()
@@ -66,11 +71,11 @@ const ListingPage = () => {
                                 <Grid className="list-page--items-inprogress" item xs={12} sm={4} md={4}>
                                     <Typography color="textSecondary">To Do</Typography>
                                     <ModalBox btnProps={btnProps} />
-                                    <CardList {...wipTaskData} />
+                                    <CardList {...wipTaskData} setCrudOperationPerformed={setCrudOperationPerformed} />
                                 </Grid> &nbsp;&nbsp;
                                 <Grid className="list-page--items-completed" item xs={12} sm={4} md={4}>
                                     <Typography color="textSecondary">Completed</Typography>
-                                    <CardList {...completedTaskData} />
+                                    <CardList {...completedTaskData} setCrudOperationPerformed={setCrudOperationPerformed} />
                                 </Grid>
                             </>
                             :
