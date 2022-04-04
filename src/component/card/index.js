@@ -29,9 +29,10 @@ export const CardList = (props) => {
     const bull = <span className={styles.bullet}>•</span>;
     const [taskData, setTaskData] = useState([]);
 
+    // !! BUG: re-rendering of this component is not hapening whenever taskData.length changes
     useEffect(() => {
         setTaskData(props.taskData)
-    }, []);
+    }, [props.taskData.length]);
 
     const btnProps = {
         name: 'edit',
@@ -48,6 +49,7 @@ export const CardList = (props) => {
                     return;
                 }
                 console.log(res.message);
+                props.setCrudOperationPerformed(true);
             }).catch(err => {
                 console.log(err.message);
                 return;
