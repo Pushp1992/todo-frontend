@@ -23,6 +23,7 @@ Open [http://localhost:8086](http://localhost:8086) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
+- Please checkout master branch for stable feature
 - Client PORT: 8086
 - Proxy server PORT: 8085
 
